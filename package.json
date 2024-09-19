@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:ghpages": "rm -rf docs/** && ng build --base-href /bill-splitter-ui/ && cp -r dist/bill-splitter-ui/browser/** ./docs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
