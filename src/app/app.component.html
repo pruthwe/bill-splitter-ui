@@ -1,28 +1,52 @@
-<mat-toolbar>
-  <span>{{title}}</span>
-</mat-toolbar>
+<header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+  <span class="fs-4">{{title}}</span>
+</header>
 
-<div>
-  <h5>Persons</h5>
-  <mat-list role="list">
-    @for (person of persons; track person) {
-      <mat-list-item role="listitem">{{ person }}</mat-list-item>
-    }
-  </mat-list>
-  <form (ngSubmit)="addPerson()">
-    <mat-form-field>
-      <mat-label>Person Name</mat-label>
-      <input matInput name="personName" [(ngModel)]="newPersonName">
-    </mat-form-field>
-    <button mat-flat-button type="submit">Add Person</button>
-  </form>
+<div class="m-1">
+<span class="fs-4 mx-4">Local storage</span>
+<button mat-flat-button (click)="getPersonsFromLocalStorage()">Load</button>
+<button mat-flat-button [disabled]="!persons().length" (click)="savePersonsToLocalStorage()">Save</button>
+<button mat-flat-button color="warn" (click)="deletePersonsFromLocalStorage()">Delete</button>
 </div>
+
+<mat-form-field class="person-chip-list">
+  <mat-label>Persons</mat-label>
+  <mat-chip-grid #chipGrid aria-label="Enter persons">
+    @for (person of persons(); track person) {
+      <mat-chip-row
+        (removed)="removePerson(person)"
+        [editable]="true"
+        (edited)="editPerson(person, $event)"
+        [aria-description]="'press enter to edit ' + person"
+      >
+        {{person}}
+        <button matChipRemove [attr.aria-label]="'remove ' + person">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip-row>
+    }
+    <input
+      placeholder="Add Person"
+      [matChipInputFor]="chipGrid"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      [matChipInputAddOnBlur]="true"
+      (matChipInputTokenEnd)="addPerson($event)"
+    />
+  </mat-chip-grid>
+</mat-form-field>
 
 <div>
   <h5>Items</h5>
   @if (items.length) {
-    <table>
-      <td>Name</td><td>Price</td><td>Shared between</td><td>Action</td>
+    <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Shared between</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
       @for (item of items; track item.name) {
         <tr>
           <td>{{ item.name }}</td>
@@ -31,7 +55,13 @@
           <td><button (click)="removeItem(item)">Remove</button></td>
         </tr>
       }
+      <tr style="font-weight: bold;">
+        <td>Total</td>
+        <td>{{getItemTotal()}}</td>
+      </tr>
+    </tbody>
     </table>
+    </div>
   }
   <form (ngSubmit)="addItem()">
     <mat-form-field>
@@ -45,7 +75,7 @@
     <mat-form-field>
       <mat-label>Shared between</mat-label>
       <mat-select name="itemPersons" [(ngModel)]="selected" multiple>
-        @for (person of persons; track person) {
+        @for (person of persons(); track person) {
           <mat-option [value]="person">{{person}}</mat-option>
         }
       </mat-select>
@@ -58,14 +88,20 @@
   <h5>Per person cost</h5>
   <button mat-flat-button (click)="split()">Split</button>
   @if (splits) {
-    <table>
-      <td>Person</td><td>Cost</td>
-      @for (person of persons; track person) {
+    <div class="table-responsive">
+    <table class="table">
+      <thead>
+      <th>Person</th><th>Cost</th>
+      </thead>
+      <tbody>
+      @for (person of persons(); track person) {
         <tr>
           <td>{{ person }}</td>
           <td>{{ splits[person] }}</td>
         </tr>
       }
+      </tbody>
     </table>
+    </div>
   }
 </div>
