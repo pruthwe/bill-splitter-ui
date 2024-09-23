@@ -10,6 +10,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatChipEditedEvent, MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 interface Item {
   name: string;
@@ -29,7 +31,9 @@ interface Item {
             MatFormFieldModule,
             MatInputModule,
             MatListModule,
-            MatButtonModule],
+            MatButtonModule,
+            MultiSelectModule,
+            InputNumberModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -43,6 +47,7 @@ export class AppComponent {
   selected: string[] = [];
   splits?: { [key: string]: number };
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  count: { [key: string]: number } = {};
 
   addItem() {
     const newItem = {

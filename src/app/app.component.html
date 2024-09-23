@@ -72,14 +72,37 @@
       <mat-label>Item Price</mat-label>
       <input matInput type="number" name="itemPrice" [(ngModel)]="itemPrice">
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>Shared between</mat-label>
-      <mat-select name="itemPersons" [(ngModel)]="selected" multiple>
+    <!-- <mat-form-field> -->
+      <!-- <mat-label>Shared between</mat-label> -->
+      <!-- <mat-select name="itemPersons" [(ngModel)]="selected" multiple>
         @for (person of persons(); track person) {
           <mat-option [value]="person">{{person}}</mat-option>
         }
-      </mat-select>
-    </mat-form-field>
+      </mat-select> -->
+      
+    <!-- </mat-form-field> -->
+    <p-multiSelect 
+    name="itemPersons"
+    [options]="persons()" 
+    [filter]="false"
+    [(ngModel)]="selected"
+    placeholder="Select Persons" >
+
+    <ng-template let-per pTemplate="item">
+      {{per}}
+      <p-inputNumber 
+        class="w2"
+        name="`item-${per}`"
+        [(ngModel)]="count[per]" 
+        [showButtons]="true" 
+        buttonLayout="horizontal" 
+        inputId="horizontal" 
+        spinnerMode="horizontal" 
+        [step]="1"
+        incrementButtonIcon="pi pi-plus" 
+        decrementButtonIcon="pi pi-minus" />
+    </ng-template>
+    </p-multiSelect>
     <button mat-flat-button type="submit">Add Item</button>
   </form>
 </div>
@@ -105,3 +128,4 @@
     </div>
   }
 </div>
+
