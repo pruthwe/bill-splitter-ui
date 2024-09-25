@@ -122,4 +122,16 @@ export class AppComponent {
   deletePersonsFromLocalStorage() {
     localStorage.removeItem('persons');
   }
+
+  copyTableToClipboard() {
+    const itemsTable = this.createItemsTable();
+    navigator.clipboard.writeText(itemsTable);
+  }
+
+  createItemsTable() {
+    return `Name | Price | Shared between\n`+
+    this.items.map(item => `${item.name} | ${item.price} | ${item.splitBetween.join(',')}`).join(`\n`)+
+    `\nTotal | ${this.getItemTotal()}`;
+  }
 }
+
