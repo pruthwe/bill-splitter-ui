@@ -1,0 +1,37 @@
+@if (items().length) {
+	<div class="table-responsive">
+		<table class="table">
+			<thead>
+				<th>Name</th>
+				<th>Price</th>
+				<th>Shared between</th>
+				<th>Action</th>
+			</thead>
+			<tbody>
+				@for (item of items(); track item.name) {
+					<tr>
+						<td>{{ item.name }}</td>
+						<td>{{ item.price }}</td>
+						<td>{{ item.splitBetween.join(', ') }}</td>
+						<td>
+							<button mat-flat-button (click)="removeItem(item)">
+								Remove
+							</button>
+						</td>
+					</tr>
+				}
+				<tr style="font-weight: bold">
+					<td>Total</td>
+					<td>{{ getItemTotal() }}</td>
+					<td>
+						<button
+							mat-flat-button
+							(click)="copyTableToClipboard()">
+							Copy Table to Clipboard
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+}

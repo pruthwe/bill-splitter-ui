@@ -1,0 +1,23 @@
+<form (ngSubmit)="addItem()">
+	<mat-form-field>
+		<mat-label>Item Name</mat-label>
+		<input matInput name="itemName" [(ngModel)]="itemName" />
+	</mat-form-field>
+	<mat-form-field>
+		<mat-label>Item Price</mat-label>
+		<input
+			matInput
+			type="number"
+			name="itemPrice"
+			[(ngModel)]="itemPrice" />
+	</mat-form-field>
+	<mat-form-field>
+		<mat-label>Shared between</mat-label>
+		<mat-select name="itemPersons" [(ngModel)]="selected" multiple>
+			@for (person of persons(); track person) {
+				<mat-option [value]="person">{{ person }}</mat-option>
+			}
+		</mat-select>
+	</mat-form-field>
+	<button mat-flat-button type="submit">Add Item</button>
+</form>
