@@ -1,20 +1,59 @@
 import { Component, model } from '@angular/core';
 import { Item } from '../../shared/types';
 import { MatButtonModule } from '@angular/material/button';
+import { AgGridAngular } from 'ag-grid-angular';
+import {
+	ColDef,
+	GridApi,
+	GridReadyEvent,
+	INumberCellEditorParams,
+	RowSelectionOptions,
+} from 'ag-grid-community';
 
 @Component({
 	selector: 'app-item-display',
 	standalone: true,
-	imports: [MatButtonModule],
+	imports: [MatButtonModule, AgGridAngular],
 	templateUrl: './item-display.component.html',
 	styleUrl: './item-display.component.scss',
 })
 export class ItemDisplayComponent {
 	items = model<Item[]>([]);
+	colDefs: ColDef<Item>[] = [
+		{ field: 'name', editable: true },
+		{
+			field: 'price',
+			editable: true,
+			cellEditor: 'agNumberCellEditor',
+			cellEditorParams: {
+				min: 0,
+				precision: 2,
+				step: 1,
+				showStepperButtons: true,
+			} as INumberCellEditorParams,
+		},
+		{
+			field: 'splitBetween',
+			width: 250,
+			valueFormatter: (params) => {
+				if (!params.value || !params.value.length) {
+					return 'None';
+				}
+				return params.value.join(', ');
+			},
+		},
+	];
+	gridApi?: GridApi<Item>;
 
-	removeItem(item: Item) {
-		this.items.set(this.items().filter((i) => i.name !== item.name));
+	rowSelection: RowSelectionOptions = {
+		mode: 'multiRow',
+		enableClickSelection: true,
+	};
+
+	onGridReady(params: GridReadyEvent) {
+		this.gridApi = params.api;
 	}
+
 	getItemTotal() {
 		return this.items().reduce((total, item) => total + item.price, 0);
 	}
@@ -35,5 +74,15 @@ export class ItemDisplayComponent {
 				.join(`\n`) +
 			`\nTotal | ${this.getItemTotal()}`
 		);
+	}
+
+	deleteSelectedItems() {
+		const selectedRows = this.gridApi?.getSelectedRows();
+		if (selectedRows?.length) {
+			this.gridApi?.applyTransaction({ remove: selectedRows });
+			this.items.set(
+				this.items().filter((item) => !selectedRows.includes(item)),
+			);
+		}
 	}
 }

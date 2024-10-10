@@ -1,4 +1,10 @@
-import { Component, input, model } from '@angular/core';
+import {
+	Component,
+	input,
+	model,
+	OnChanges,
+	SimpleChanges,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,12 +25,19 @@ import { Item } from '../../shared/types';
 	templateUrl: './item-form.component.html',
 	styleUrl: './item-form.component.scss',
 })
-export class ItemFormComponent {
-	persons = input<string[]>([]);
+export class ItemFormComponent implements OnChanges {
+	persons = input<string[]>();
 	itemName = '';
 	itemPrice?: number;
 	selected: string[] = [];
 	items = model<Item[]>([]);
+
+	ngOnChanges(changes: SimpleChanges) {
+		if (changes['persons'] && this.persons()) {
+			this.selected = [...this.persons()!];
+		}
+	}
+
 	addItem() {
 		const newItem = {
 			name: this.itemName,
@@ -34,6 +47,6 @@ export class ItemFormComponent {
 		this.items.set([...this.items(), newItem]);
 		this.itemName = '';
 		this.itemPrice = 0;
-		this.selected = [];
+		this.selected = [...this.persons()!];
 	}
 }
