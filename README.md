@@ -27,4 +27,5 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
 
 ## Deployment
+
 This is hosted using github pages. After making all changes to source code, create PR to gh-pages branch, checkout to it and run npm run build:ghpages, commit and push changes to reflect on github pages https://pruthwe.github.io/bill-splitter-ui/

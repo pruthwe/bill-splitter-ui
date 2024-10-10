@@ -1,0 +1,22 @@
+<div>
+	<h5>Per person cost</h5>
+	<button mat-flat-button (click)="split()">Split</button>
+	@if (splits) {
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<th>Person</th>
+					<th>Cost</th>
+				</thead>
+				<tbody>
+					@for (person of persons(); track person) {
+						<tr>
+							<td>{{ person }}</td>
+							<td>{{ splits[person] }}</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	}
+</div>

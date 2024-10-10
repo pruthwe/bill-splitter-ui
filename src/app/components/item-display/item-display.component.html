@@ -1,0 +1,23 @@
+@if (items().length) {
+	<div>
+		<ag-grid-angular
+			class="ag-theme-material"
+			style="max-height: 500px"
+			[rowSelection]="rowSelection"
+			[stopEditingWhenCellsLoseFocus]="true"
+			[rowData]="items()"
+			[domLayout]="'autoHeight'"
+			[columnDefs]="colDefs"
+			(gridReady)="onGridReady($event)" />
+		<div class="total-row">
+			<span>Total</span>
+			<span>{{ getItemTotal() }}</span>
+			<button mat-flat-button (click)="copyTableToClipboard()">
+				Copy to Clipboard
+			</button>
+			<button mat-flat-button (click)="deleteSelectedItems()">
+				Delete Items
+			</button>
+		</div>
+	</div>
+}

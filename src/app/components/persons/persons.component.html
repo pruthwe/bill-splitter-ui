@@ -1,0 +1,23 @@
+<mat-form-field class="person-chip-list">
+	<mat-label>Persons</mat-label>
+	<mat-chip-grid #chipGrid aria-label="Enter persons">
+		@for (person of persons(); track person) {
+			<mat-chip-row
+				(removed)="removePerson(person)"
+				[editable]="true"
+				(edited)="editPerson(person, $event)"
+				[aria-description]="'press enter to edit ' + person">
+				{{ person }}
+				<button matChipRemove [attr.aria-label]="'remove ' + person">
+					<mat-icon>cancel</mat-icon>
+				</button>
+			</mat-chip-row>
+		}
+		<input
+			placeholder="Add Person"
+			[matChipInputFor]="chipGrid"
+			[matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+			[matChipInputAddOnBlur]="true"
+			(matChipInputTokenEnd)="addPerson($event)" />
+	</mat-chip-grid>
+</mat-form-field>

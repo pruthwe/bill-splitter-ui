@@ -1,0 +1,16 @@
+<div class="m-1">
+	<span class="fs-4 mx-4">Local storage</span>
+	<button mat-flat-button (click)="getPersonsFromLocalStorage()">Load</button>
+	<button
+		mat-flat-button
+		[disabled]="!persons().length"
+		(click)="savePersonsToLocalStorage()">
+		Save
+	</button>
+	<button
+		mat-flat-button
+		color="warn"
+		(click)="deletePersonsFromLocalStorage()">
+		Delete
+	</button>
+</div>
