@@ -2,7 +2,9 @@
 	<span class="fs-4">{{ title }}</span>
 </header>
 
-<app-person-storage [(persons)]="persons"></app-person-storage>
+<app-person-storage
+	[(persons)]="persons"
+	[(items)]="items"></app-person-storage>
 
 <app-persons [(persons)]="persons" [(items)]="items"></app-persons>
 

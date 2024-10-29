@@ -5,6 +5,7 @@ import { AgGridAngular } from 'ag-grid-angular';
 import {
 	ColDef,
 	GridApi,
+	GridOptions,
 	GridReadyEvent,
 	INumberCellEditorParams,
 	RowSelectionOptions,
@@ -34,7 +35,6 @@ export class ItemDisplayComponent {
 		},
 		{
 			field: 'splitBetween',
-			width: 250,
 			valueFormatter: (params) => {
 				if (!params.value || !params.value.length) {
 					return 'None';
@@ -44,6 +44,12 @@ export class ItemDisplayComponent {
 		},
 	];
 	gridApi?: GridApi<Item>;
+
+	gridOptions: GridOptions<Item> = {
+		autoSizeStrategy: {
+			type: 'fitCellContents',
+		},
+	};
 
 	rowSelection: RowSelectionOptions = {
 		mode: 'multiRow',
