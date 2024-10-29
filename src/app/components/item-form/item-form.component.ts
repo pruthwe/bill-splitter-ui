@@ -40,6 +40,7 @@ export class ItemFormComponent implements OnChanges {
 
 	addItem() {
 		const newItem = {
+			id: this.items().length,
 			name: this.itemName,
 			price: this.itemPrice!,
 			splitBetween: this.selected,

@@ -1,8 +1,8 @@
 @if (items().length) {
 	<div>
 		<ag-grid-angular
-			class="ag-theme-material"
-			style="max-height: 500px"
+			class="ag-theme-quartz"
+			[gridOptions]="gridOptions"
 			[rowSelection]="rowSelection"
 			[stopEditingWhenCellsLoseFocus]="true"
 			[rowData]="items()"

@@ -16,6 +16,7 @@ export class SplitComponent {
 
 	split() {
 		const split: Record<string, number> = {};
+		this.setItemsInLocalStorage();
 
 		for (const item of this.items()) {
 			const itemSplit = item.price / item.splitBetween.length;
@@ -27,5 +28,10 @@ export class SplitComponent {
 		}
 
 		this.splits = split;
+	}
+
+	setItemsInLocalStorage() {
+		localStorage.setItem('recentPersons', JSON.stringify(this.persons()));
+		localStorage.setItem('recentItems', JSON.stringify(this.items()));
 	}
 }
