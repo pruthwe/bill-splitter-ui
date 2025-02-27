@@ -10,6 +10,7 @@ import {
 	INumberCellEditorParams,
 	RowSelectionOptions,
 } from 'ag-grid-community';
+import { createItemsTable } from '../../shared/utils';
 
 @Component({
 	selector: 'app-item-display',
@@ -70,16 +71,7 @@ export class ItemDisplayComponent {
 	}
 
 	createItemsTable() {
-		return (
-			`Name | Price | Shared between\n` +
-			this.items()
-				.map(
-					(item) =>
-						`${item.name} | ${item.price} | ${item.splitBetween.join(',')}`,
-				)
-				.join(`\n`) +
-			`\nTotal | ${this.getItemTotal()}`
-		);
+		return createItemsTable(this.items());
 	}
 
 	deleteSelectedItems() {
