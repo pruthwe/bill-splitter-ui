@@ -1,6 +1,7 @@
 import { Component, model } from '@angular/core';
-import { Item } from '../../shared/types';
+import { CustomSplit, Item } from '../../shared/types';
 import { MatButtonModule } from '@angular/material/button';
+import { isObjectArray } from '../../shared/utils';
 
 @Component({
 	selector: 'app-split',
@@ -19,8 +20,17 @@ export class SplitComponent {
 		this.setItemsInLocalStorage();
 
 		for (const item of this.items()) {
+			if(isObjectArray<CustomSplit>(item.splitBetween)){
+				for (const customSplit of item.splitBetween) {
+					const itemSplit = item.price * customSplit.percent;
+					split[customSplit.name] = split[customSplit.name]
+						? split[customSplit.name] + itemSplit
+						: itemSplit;
+				}
+				continue;
+			}
 			const itemSplit = item.price / item.splitBetween.length;
-			for (const person of item.splitBetween) {
+			for (const person of item.splitBetween as string[]) {
 				split[person] = split[person]
 					? split[person] + itemSplit
 					: itemSplit;

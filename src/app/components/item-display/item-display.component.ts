@@ -10,7 +10,7 @@ import {
 	INumberCellEditorParams,
 	RowSelectionOptions,
 } from 'ag-grid-community';
-import { createItemsTable } from '../../shared/utils';
+import { createItemsTable, getSplitBetweenString } from '../../shared/utils';
 
 @Component({
 	selector: 'app-item-display',
@@ -40,7 +40,7 @@ export class ItemDisplayComponent {
 				if (!params.value || !params.value.length) {
 					return 'None';
 				}
-				return params.value.join(', ');
+				return getSplitBetweenString(params.value);
 			},
 		},
 	];

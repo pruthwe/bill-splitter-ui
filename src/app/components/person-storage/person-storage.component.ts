@@ -48,12 +48,12 @@ export class PersonStorageComponent {
 	openDialog() {
 		const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
 			data: this.itemsText(),
-		  });
-	  
-		  dialogRef.afterClosed().subscribe(result => {
+		});
+
+		dialogRef.afterClosed().subscribe(result => {
 			if (result !== undefined) {
 				const decoded = decodeItemsText(result);
-				if(decoded) {
+				if (decoded) {
 					this.persons.set(decoded.persons);
 					this.items.set(decoded.items);
 					this.itemsText.set(result);
@@ -61,7 +61,7 @@ export class PersonStorageComponent {
 					alert('Invalid Items text');
 				}
 			}
-		  });
+		});
 	}
 }
 
@@ -77,22 +77,22 @@ export class PersonStorageComponent {
 				</mat-dialog-actions>`,
 	standalone: true,
 	imports: [
-	  MatFormFieldModule,
-	  MatInputModule,
-	  FormsModule,
-	  MatButtonModule,
-	  MatDialogTitle,
-	  MatDialogContent,
-	  MatDialogActions,
-	  MatDialogClose,
+		MatFormFieldModule,
+		MatInputModule,
+		FormsModule,
+		MatButtonModule,
+		MatDialogTitle,
+		MatDialogContent,
+		MatDialogActions,
+		MatDialogClose,
 	],
-  })
-  export class DialogOverviewExampleDialog {
+})
+export class DialogOverviewExampleDialog {
 	readonly dialogRef = inject(MatDialogRef<DialogOverviewExampleDialog>);
 	readonly data = inject<String>(MAT_DIALOG_DATA);
 	readonly itemsText = model(this.data);
-  
+
 	onNoClick(): void {
-	  this.dialogRef.close();
+		this.dialogRef.close();
 	}
-  }
+}

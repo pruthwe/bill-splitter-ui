@@ -11,13 +11,20 @@
 			name="itemPrice"
 			[(ngModel)]="itemPrice" />
 	</mat-form-field>
-	<mat-form-field>
-		<mat-label>Shared between</mat-label>
-		<mat-select name="itemPersons" [(ngModel)]="selected" multiple>
-			@for (person of persons(); track person) {
-				<mat-option [value]="person">{{ person }}</mat-option>
-			}
-		</mat-select>
-	</mat-form-field>
+	@if (isCustomSplit()) {
+		{{ getCustomSplitText() }}
+	} @else {
+		<mat-form-field>
+			<mat-label>Shared between</mat-label>
+			<mat-select name="itemPersons" [(ngModel)]="selected" multiple>
+				@for (person of persons(); track person) {
+					<mat-option [value]="person">{{ person }}</mat-option>
+				}
+			</mat-select>
+		</mat-form-field>
+	}
 	<button mat-flat-button type="submit">Add Item</button>
+	<button mat-flat-button type="button" (click)="customSplit()">
+		Custom Split
+	</button>
 </form>
