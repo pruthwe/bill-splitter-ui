@@ -7,7 +7,8 @@ import {
 } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { Item } from '../../shared/types';
+import { CustomSplit, Item } from '../../shared/types';
+import { isObjectArray } from '../../shared/utils';
 
 @Component({
 	selector: 'app-persons',
@@ -45,7 +46,15 @@ export class PersonsComponent {
 		});
 		this.items.set(
 			this.items().map((item) => {
-				if (item.splitBetween.includes(person)) {
+				if(isObjectArray<CustomSplit>(item.splitBetween)) {
+					item.splitBetween = item.splitBetween.map((split: CustomSplit) => {
+						if (split.name === person) {
+							split.name = value;
+						}
+						return split;
+					});
+				}
+				else if (item.splitBetween.includes(person)) {
 					item.splitBetween = item.splitBetween.map((p) =>
 						p === person ? value : p,
 					);
