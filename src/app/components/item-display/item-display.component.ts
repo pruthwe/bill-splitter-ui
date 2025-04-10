@@ -1,11 +1,10 @@
-import { Component, model } from '@angular/core';
+import { Component, model, computed } from '@angular/core';
 import { Item } from '../../shared/types';
 import { MatButtonModule } from '@angular/material/button';
 import { AgGridAngular } from 'ag-grid-angular';
 import {
 	ColDef,
 	GridApi,
-	GridOptions,
 	GridReadyEvent,
 	INumberCellEditorParams,
 	RowSelectionOptions,
@@ -21,6 +20,9 @@ import { createItemsTable, getSplitBetweenString } from '../../shared/utils';
 })
 export class ItemDisplayComponent {
 	items = model<Item[]>([]);
+	total = computed(() =>
+		this.items().reduce((total, item) => total + item.price, 0),
+	);
 	colDefs: ColDef<Item>[] = [
 		{ field: 'name', editable: true },
 		{
@@ -46,12 +48,6 @@ export class ItemDisplayComponent {
 	];
 	gridApi?: GridApi<Item>;
 
-	gridOptions: GridOptions<Item> = {
-		autoSizeStrategy: {
-			type: 'fitCellContents',
-		},
-	};
-
 	rowSelection: RowSelectionOptions = {
 		mode: 'multiRow',
 		enableClickSelection: true,
@@ -61,8 +57,8 @@ export class ItemDisplayComponent {
 		this.gridApi = params.api;
 	}
 
-	getItemTotal() {
-		return this.items().reduce((total, item) => total + item.price, 0);
+	onCellValueChanged(event: any): void {
+		this.items.set([...this.items()]);
 	}
 
 	copyTableToClipboard() {
