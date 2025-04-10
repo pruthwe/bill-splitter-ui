@@ -2,16 +2,15 @@
 	<div>
 		<ag-grid-angular
 			class="ag-theme-quartz"
-			[gridOptions]="gridOptions"
 			[rowSelection]="rowSelection"
 			[stopEditingWhenCellsLoseFocus]="true"
 			[rowData]="items()"
-			[domLayout]="'autoHeight'"
 			[columnDefs]="colDefs"
-			(gridReady)="onGridReady($event)" />
+			(gridReady)="onGridReady($event)"
+			(cellValueChanged)="onCellValueChanged($event)" />
 		<div class="total-row">
 			<span>Total</span>
-			<span>{{ getItemTotal() }}</span>
+			<span>{{ total() }}</span>
 			<button mat-flat-button (click)="copyTableToClipboard()">
 				Copy to Clipboard
 			</button>
