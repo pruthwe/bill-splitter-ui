@@ -57,9 +57,16 @@ export class ItemFormComponent implements OnChanges {
 		this.itemName = '';
 		this.itemPrice = 0;
 		this.selected = [...this.persons()!];
+		this.isCustomSplit.set(false);
+		this.customSplitValue = [];
 	}
 
 	customSplit() {
+		if (this.isCustomSplit()) {
+			this.isCustomSplit.set(false);
+			this.customSplitValue = [];
+			return;
+		}
 		const dialogRef = this.dialog.open(CustomSplitDialogComponent, {
 			data: this.persons(),
 		});

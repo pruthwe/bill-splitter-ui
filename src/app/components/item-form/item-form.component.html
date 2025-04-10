@@ -25,6 +25,10 @@
 	}
 	<button mat-flat-button type="submit">Add Item</button>
 	<button mat-flat-button type="button" (click)="customSplit()">
-		Custom Split
+		@if (!isCustomSplit()) {
+			Custom Split
+		} @else {
+			Default split
+		}
 	</button>
 </form>
