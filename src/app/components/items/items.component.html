@@ -1,5 +1,9 @@
-<div>
-	<h5>Items</h5>
-	<app-item-form [persons]="persons()" [(items)]="items"></app-item-form>
-	<app-item-display [(items)]="items"></app-item-display>
-</div>
+<mat-card class="mb-4 shadow-sm">
+	<mat-card-header>
+		<mat-card-title class="text-primary mb-3">Items</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		<app-item-form [persons]="persons()" [(items)]="items"></app-item-form>
+		<app-item-display [(items)]="items"></app-item-display>
+	</mat-card-content>
+</mat-card>

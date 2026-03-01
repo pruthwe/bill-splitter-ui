@@ -1,9 +1,9 @@
-<form (ngSubmit)="addItem()">
-	<mat-form-field>
+<form (ngSubmit)="addItem()" class="d-flex flex-wrap gap-3 align-items-start mb-2">
+	<mat-form-field appearance="outline" class="flex-grow-1">
 		<mat-label>Item Name</mat-label>
 		<input matInput name="itemName" [(ngModel)]="itemName" />
 	</mat-form-field>
-	<mat-form-field>
+	<mat-form-field appearance="outline" style="width: 120px;">
 		<mat-label>Item Price</mat-label>
 		<input
 			matInput
@@ -11,24 +11,31 @@
 			name="itemPrice"
 			[(ngModel)]="itemPrice" />
 	</mat-form-field>
-	@if (isCustomSplit()) {
-		{{ getCustomSplitText() }}
-	} @else {
-		<mat-form-field>
-			<mat-label>Shared between</mat-label>
-			<mat-select name="itemPersons" [(ngModel)]="selected" multiple>
-				@for (person of persons(); track person) {
-					<mat-option [value]="person">{{ person }}</mat-option>
-				}
-			</mat-select>
-		</mat-form-field>
-	}
-	<button mat-flat-button type="submit">Add Item</button>
-	<button mat-flat-button type="button" (click)="customSplit()">
-		@if (!isCustomSplit()) {
-			Custom Split
+	<div class="d-flex flex-column" style="min-width: 200px;">
+		@if (isCustomSplit()) {
+			<div class="p-2 border rounded text-muted mt-2">
+				{{ getCustomSplitText() }}
+			</div>
 		} @else {
-			Default split
+			<mat-form-field appearance="outline" class="w-100">
+				<mat-label>Shared between</mat-label>
+				<mat-select name="itemPersons" [(ngModel)]="selected" multiple>
+					@for (person of persons(); track person) {
+						<mat-option [value]="person">{{ person }}</mat-option>
+					}
+				</mat-select>
+			</mat-form-field>
 		}
-	</button>
+	</div>
+	<div class="d-flex gap-2 mt-2">
+		<button mat-flat-button color="primary" type="submit" [disabled]="!itemName || !itemPrice">Add Item</button>
+		<button mat-stroked-button color="primary" type="button" (click)="customSplit()">
+			@if (!isCustomSplit()) {
+				Custom Split
+			} @else {
+				Default split
+			}
+		</button>
+	</div>
 </form>
+

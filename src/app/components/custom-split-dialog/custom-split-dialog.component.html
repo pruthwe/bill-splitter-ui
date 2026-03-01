@@ -1,22 +1,25 @@
-<h2 mat-dialog-title>Enter Items text</h2>
-<mat-dialog-content>
+<h2 mat-dialog-title class="text-primary mb-2">Custom Split</h2>
+<mat-dialog-content class="pb-3">
 	@for (person of persons; track person) {
-		<div class="person-split-field">
-			<p>{{ person }}</p>
-			<input
-				type="number"
-				min="0"
-				max="1"
-				matInput
-				name="itemsText"
-				[(ngModel)]="personSplit[person]"
-				(ngModelChange)="checkFormStatus()" />
+		<div class="d-flex align-items-center justify-content-between mb-2">
+			<span class="fw-medium me-3">{{ person }}</span>
+			<mat-form-field appearance="outline" class="mb-n3" style="width: 120px;">
+				<input
+					type="number"
+					min="0"
+					max="1"
+					step="0.1"
+					matInput
+					name="itemsText"
+					[(ngModel)]="personSplit[person]"
+					(ngModelChange)="checkFormStatus()" />
+			</mat-form-field>
 		</div>
 	}
 </mat-dialog-content>
-<mat-dialog-actions>
+<mat-dialog-actions align="end">
 	<button mat-button (click)="onNoClick()">Cancel</button>
-	<button mat-button [disabled]="!isValidSplit()" (click)="customSplit()">
+	<button mat-flat-button color="primary" [disabled]="!isValidSplit()" (click)="customSplit()">
 		Submit
 	</button>
 </mat-dialog-actions>
