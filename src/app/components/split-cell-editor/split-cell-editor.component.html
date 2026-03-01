@@ -1,0 +1,26 @@
+<div class="split-editor-container d-flex flex-column gap-2 p-2">
+	@if (isCustomSplit()) {
+		<div class="p-2 border rounded text-muted">
+			{{ getCustomSplitText() }}
+		</div>
+	} @else {
+		<mat-form-field appearance="outline" class="flex-grow-1 mb-n3">
+			<mat-label>Shared between</mat-label>
+			<mat-select name="itemPersons" [(ngModel)]="selected" multiple>
+				@for (person of persons(); track person) {
+					<mat-option [value]="person">{{ person }}</mat-option>
+				}
+			</mat-select>
+		</mat-form-field>
+	}
+	<div class="d-flex gap-2">
+		<button mat-flat-button color="primary" type="button" (click)="save()">Save</button>
+		<button mat-stroked-button color="primary" type="button" (click)="customSplit()">
+			@if (!isCustomSplit()) {
+				Custom Split
+			} @else {
+				Default split
+			}
+		</button>
+	</div>
+</div>

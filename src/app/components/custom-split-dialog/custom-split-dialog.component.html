@@ -1,6 +1,6 @@
 <h2 mat-dialog-title class="text-primary mb-2">Custom Split</h2>
 <mat-dialog-content class="pb-3">
-	@for (person of persons; track person) {
+	@for (person of data.persons; track person) {
 		<div class="d-flex align-items-center justify-content-between mb-2">
 			<span class="fw-medium me-3">{{ person }}</span>
 			<mat-form-field appearance="outline" class="mb-n3" style="width: 120px;">
