@@ -18,17 +18,16 @@ import { MatDialog } from '@angular/material/dialog';
 import { getSplitBetweenString } from '../../shared/utils';
 
 @Component({
-	selector: 'app-item-form',
-	standalone: true,
-	imports: [
-		FormsModule,
-		MatFormFieldModule,
-		MatSelectModule,
-		MatButtonModule,
-		MatInputModule,
-	],
-	templateUrl: './item-form.component.html',
-	styleUrl: './item-form.component.scss',
+    selector: 'app-item-form',
+    imports: [
+        FormsModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatInputModule,
+    ],
+    templateUrl: './item-form.component.html',
+    styleUrl: './item-form.component.scss'
 })
 export class ItemFormComponent implements OnChanges {
 	persons = input<string[]>();

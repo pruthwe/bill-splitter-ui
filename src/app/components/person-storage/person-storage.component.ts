@@ -9,11 +9,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-	selector: 'app-person-storage',
-	standalone: true,
-	imports: [MatButtonModule, FormsModule, MatCardModule],
-	templateUrl: './person-storage.component.html',
-	styleUrl: './person-storage.component.scss',
+    selector: 'app-person-storage',
+    imports: [MatButtonModule, FormsModule, MatCardModule],
+    templateUrl: './person-storage.component.html',
+    styleUrl: './person-storage.component.scss'
 })
 export class PersonStorageComponent {
 	persons = model<string[]>([]);
@@ -67,8 +66,8 @@ export class PersonStorageComponent {
 }
 
 @Component({
-	selector: 'dialog-overview-example-dialog',
-	template: `<h2 mat-dialog-title>Enter Items text</h2>
+    selector: 'dialog-overview-example-dialog',
+    template: `<h2 mat-dialog-title>Enter Items text</h2>
 				<mat-dialog-content>
 					<textarea type="text" [(ngModel)]="itemsText"></textarea>
 				</mat-dialog-content>
@@ -76,17 +75,16 @@ export class PersonStorageComponent {
 				<button mat-button (click)="onNoClick()">Cancel</button>
 				<button mat-button [mat-dialog-close]="itemsText()" cdkFocusInitial>Submit</button>
 				</mat-dialog-actions>`,
-	standalone: true,
-	imports: [
-		MatFormFieldModule,
-		MatInputModule,
-		FormsModule,
-		MatButtonModule,
-		MatDialogTitle,
-		MatDialogContent,
-		MatDialogActions,
-		MatDialogClose,
-	],
+    imports: [
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        MatButtonModule,
+        MatDialogTitle,
+        MatDialogContent,
+        MatDialogActions,
+        MatDialogClose,
+    ]
 })
 export class DialogOverviewExampleDialog {
 	readonly dialogRef = inject(MatDialogRef<DialogOverviewExampleDialog>);

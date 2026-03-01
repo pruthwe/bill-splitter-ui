@@ -12,11 +12,10 @@ import { CustomSplit, Item } from '../../shared/types';
 import { isObjectArray } from '../../shared/utils';
 
 @Component({
-	selector: 'app-persons',
-	standalone: true,
-	imports: [MatChipsModule, MatFormFieldModule, MatIconModule, MatCardModule],
-	templateUrl: './persons.component.html',
-	styleUrl: './persons.component.scss',
+    selector: 'app-persons',
+    imports: [MatChipsModule, MatFormFieldModule, MatIconModule, MatCardModule],
+    templateUrl: './persons.component.html',
+    styleUrl: './persons.component.scss'
 })
 export class PersonsComponent {
 	persons = model<string[]>([]);

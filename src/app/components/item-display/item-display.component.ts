@@ -13,11 +13,10 @@ import { createItemsTable, getSplitBetweenString } from '../../shared/utils';
 import { SplitCellEditorComponent } from '../split-cell-editor/split-cell-editor.component';
 
 @Component({
-	selector: 'app-item-display',
-	standalone: true,
-	imports: [MatButtonModule, AgGridAngular, SplitCellEditorComponent],
-	templateUrl: './item-display.component.html',
-	styleUrl: './item-display.component.scss',
+    selector: 'app-item-display',
+    imports: [MatButtonModule, AgGridAngular, SplitCellEditorComponent],
+    templateUrl: './item-display.component.html',
+    styleUrl: './item-display.component.scss'
 })
 export class ItemDisplayComponent {
 	persons = input<string[]>();

@@ -12,18 +12,18 @@ export interface CustomSplitDialogData {
 }
 
 @Component({
-	selector: 'app-custom-split-dialog',
-	standalone: true,
-	imports: [
-		MatButtonModule,
-		MatFormFieldModule,
-		MatInputModule,
-		FormsModule,
-		MatDialogTitle,
-		MatDialogContent,
-		MatDialogActions],
-	templateUrl: './custom-split-dialog.component.html',
-	styleUrl: './custom-split-dialog.component.scss'
+    selector: 'app-custom-split-dialog',
+    imports: [
+        MatButtonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        MatDialogTitle,
+        MatDialogContent,
+        MatDialogActions
+    ],
+    templateUrl: './custom-split-dialog.component.html',
+    styleUrl: './custom-split-dialog.component.scss'
 })
 export class CustomSplitDialogComponent {
 	readonly dialogRef = inject(MatDialogRef<CustomSplitDialogComponent>);

@@ -17,7 +17,6 @@ interface SplitCellEditorParams extends ICellEditorParams {
 
 @Component({
     selector: 'app-split-cell-editor',
-    standalone: true,
     imports: [
         CommonModule,
         FormsModule,

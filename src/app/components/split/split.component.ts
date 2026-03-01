@@ -6,11 +6,10 @@ import { isObjectArray } from '../../shared/utils';
 import { CommonModule } from '@angular/common';
 
 @Component({
-	selector: 'app-split',
-	standalone: true,
-	imports: [MatButtonModule, MatCardModule, CommonModule],
-	templateUrl: './split.component.html',
-	styleUrl: './split.component.scss',
+    selector: 'app-split',
+    imports: [MatButtonModule, MatCardModule, CommonModule],
+    templateUrl: './split.component.html',
+    styleUrl: './split.component.scss'
 })
 export class SplitComponent {
 	persons = model<string[]>([]);
