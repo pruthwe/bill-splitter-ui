@@ -1,5 +1,6 @@
 import { Component, inject, model, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { Item } from '../../shared/types';
 import { FormsModule } from '@angular/forms';
@@ -10,7 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 @Component({
 	selector: 'app-person-storage',
 	standalone: true,
-	imports: [MatButtonModule, FormsModule],
+	imports: [MatButtonModule, FormsModule, MatCardModule],
 	templateUrl: './person-storage.component.html',
 	styleUrl: './person-storage.component.scss',
 })

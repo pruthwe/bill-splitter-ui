@@ -7,13 +7,14 @@ import {
 } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 import { CustomSplit, Item } from '../../shared/types';
 import { isObjectArray } from '../../shared/utils';
 
 @Component({
 	selector: 'app-persons',
 	standalone: true,
-	imports: [MatChipsModule, MatFormFieldModule, MatIconModule],
+	imports: [MatChipsModule, MatFormFieldModule, MatIconModule, MatCardModule],
 	templateUrl: './persons.component.html',
 	styleUrl: './persons.component.scss',
 })
@@ -46,7 +47,7 @@ export class PersonsComponent {
 		});
 		this.items.set(
 			this.items().map((item) => {
-				if(isObjectArray<CustomSplit>(item.splitBetween)) {
+				if (isObjectArray<CustomSplit>(item.splitBetween)) {
 					item.splitBetween = item.splitBetween.map((split: CustomSplit) => {
 						if (split.name === person) {
 							split.name = value;

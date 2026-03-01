@@ -1,22 +1,30 @@
-<div class="m-1">
-	<span class="fs-4 mx-4">Local storage</span>
-	<button mat-flat-button (click)="getPersonsFromLocalStorage()">Load</button>
-	<button
-		mat-flat-button
-		[disabled]="!persons().length"
-		(click)="savePersonsToLocalStorage()">
-		Save
-	</button>
-	<button
-		mat-flat-button
-		color="warn"
-		(click)="deletePersonsFromLocalStorage()">
-		Delete
-	</button>
-	<button mat-flat-button (click)="getItemsFromLocalStorage()">
-		Load Recent Split
-	</button>
-	<button mat-flat-button (click)="loadTransactionsFromText()">
-		Load Transaction from Text
-	</button>
-</div>
+<mat-card class="mb-4 shadow-sm">
+	<mat-card-header>
+		<mat-card-title class="text-primary mb-3">Local Storage</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		<div class="d-flex flex-wrap gap-2 align-items-center">
+			<button mat-flat-button color="primary" (click)="getPersonsFromLocalStorage()">Load</button>
+			<button
+				mat-flat-button
+				color="primary"
+				[disabled]="!persons().length"
+				(click)="savePersonsToLocalStorage()">
+				Save
+			</button>
+			<button
+				mat-flat-button
+				color="warn"
+				(click)="deletePersonsFromLocalStorage()">
+				Delete
+			</button>
+			<div class="vr mx-2 d-none d-md-block"></div>
+			<button mat-stroked-button color="primary" (click)="getItemsFromLocalStorage()">
+				Load Recent Split
+			</button>
+			<button mat-stroked-button color="primary" (click)="loadTransactionsFromText()">
+				Load Transaction from Text
+			</button>
+		</div>
+	</mat-card-content>
+</mat-card>

@@ -1,12 +1,14 @@
 import { Component, model } from '@angular/core';
 import { CustomSplit, Item } from '../../shared/types';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { isObjectArray } from '../../shared/utils';
+import { CommonModule } from '@angular/common';
 
 @Component({
 	selector: 'app-split',
 	standalone: true,
-	imports: [MatButtonModule],
+	imports: [MatButtonModule, MatCardModule, CommonModule],
 	templateUrl: './split.component.html',
 	styleUrl: './split.component.scss',
 })
@@ -20,7 +22,7 @@ export class SplitComponent {
 		this.setItemsInLocalStorage();
 
 		for (const item of this.items()) {
-			if(isObjectArray<CustomSplit>(item.splitBetween)){
+			if (isObjectArray<CustomSplit>(item.splitBetween)) {
 				for (const customSplit of item.splitBetween) {
 					const itemSplit = item.price * customSplit.percent;
 					split[customSplit.name] = split[customSplit.name]
