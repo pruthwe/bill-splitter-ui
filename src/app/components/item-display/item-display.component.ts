@@ -1,4 +1,4 @@
-import { Component, model, computed } from '@angular/core';
+import { Component, model, computed, input } from '@angular/core';
 import { Item } from '../../shared/types';
 import { MatButtonModule } from '@angular/material/button';
 import { AgGridAngular } from 'ag-grid-angular';
@@ -10,15 +10,17 @@ import {
 	RowSelectionOptions,
 } from 'ag-grid-community';
 import { createItemsTable, getSplitBetweenString } from '../../shared/utils';
+import { SplitCellEditorComponent } from '../split-cell-editor/split-cell-editor.component';
 
 @Component({
 	selector: 'app-item-display',
 	standalone: true,
-	imports: [MatButtonModule, AgGridAngular],
+	imports: [MatButtonModule, AgGridAngular, SplitCellEditorComponent],
 	templateUrl: './item-display.component.html',
 	styleUrl: './item-display.component.scss',
 })
 export class ItemDisplayComponent {
+	persons = input<string[]>();
 	items = model<Item[]>([]);
 	total = computed(() =>
 		this.items().reduce((total, item) => total + item.price, 0),
@@ -38,6 +40,19 @@ export class ItemDisplayComponent {
 		},
 		{
 			field: 'splitBetween',
+			editable: true,
+			cellEditor: SplitCellEditorComponent,
+			cellEditorPopup: true,
+			cellEditorParams: {
+				persons: () => this.persons() || [],
+			},
+			valueSetter: (params) => {
+				if (params.newValue !== params.oldValue) {
+					params.data.splitBetween = params.newValue;
+					return true;
+				}
+				return false;
+			},
 			valueFormatter: (params) => {
 				if (!params.value || !params.value.length) {
 					return 'None';
@@ -58,7 +73,14 @@ export class ItemDisplayComponent {
 	}
 
 	onCellValueChanged(event: any): void {
-		this.items.set([...this.items()]);
+		const updatedItem = event.data;
+		const items = [...this.items()];
+		const index = items.findIndex((i) => i.id === updatedItem.id);
+		if (index !== -1) {
+			// Replace the item with a new reference so computed properties and child components detect the change deep down
+			items[index] = { ...updatedItem };
+		}
+		this.items.set(items);
 	}
 
 	copyTableToClipboard() {

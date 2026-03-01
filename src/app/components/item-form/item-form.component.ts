@@ -68,7 +68,10 @@ export class ItemFormComponent implements OnChanges {
 			return;
 		}
 		const dialogRef = this.dialog.open(CustomSplitDialogComponent, {
-			data: this.persons(),
+			data: {
+				persons: this.persons(),
+				split: this.isCustomSplit() ? this.customSplitValue : undefined,
+			},
 		});
 
 		dialogRef.afterClosed().subscribe(result => {
